@@ -1,6 +1,7 @@
 enable
 terminal escape-character 3
 configure terminal
+no ip domain-lookup
 
 hostname ISP-Sucursal-01
 
