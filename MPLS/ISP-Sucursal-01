@@ -1,3 +1,6 @@
+enable
+terminal escape-character 3
+configure terminal
 
 hostname ISP-Sucursal-01
 
@@ -43,7 +46,7 @@ router-id 11.11.11.11
 router bgp 1
 neighbor portafolio peer-group
 neighbor portafolio remote-as 1
-neighbor portafolio update-source loopbak 0
+neighbor portafolio update-source loopback 0
 
 neighbor 100.100.100.100 peer-group portafolio
 neighbor 22.22.22.22 peer-group portafolio
@@ -65,7 +68,6 @@ neighbor 66.66.66.66 activate
 neighbor 111.111.111.111 activate
 neighbor 222.222.222.222 activate
 neighbor 223.223.223.223 activate
-exit address-family
 
 address-family ipv4 vrf portafolio
 redistribute ospf 100
