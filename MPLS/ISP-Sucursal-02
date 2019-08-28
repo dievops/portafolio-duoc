@@ -1,52 +1,46 @@
-hostname ISP-Principal
+
+hostname ISP-Sucursal-02
 
 ip vrf portafolio
 rd 1:1
 route-target export 1:1
 route-target import 1:1
 
-ip cef
-
 interface Loopback0
 no shutdown
-ip address 100.100.100.100 255.255.255.255
+ip address 22.22.22.22 255.255.255.255
 ip ospf 1 area 0
 
 interface Ethernet0/0
 no shutdown
 ip vrf forwarding portafolio
-ip address 172.10.0.2 255.255.255.252
+ip address 172.2.0.2 255.255.255.252
 ip ospf 100 area 0
 
 interface Ethernet0/1
 no shutdown
-no ip address
-shutdown
+ip address 200.200.202.1 255.255.255.252
+ip ospf 1 area 0
 
 interface Ethernet0/2
-no shutdown
 no ip address
 shutdown
 
 interface Ethernet0/3
-no shutdown
-ip address 200.200.200.1 255.255.255.252
-ip ospf 1 area 0
-
-router ospf 100 vrf portafolio
-redistribute bgp 1 subnets
+no ip address
+shutdown
 
 router ospf 1
 mpls ldp autoconfig
-router-id 100.100.100.100
+router-id 22.22.22.22
 
 router bgp 1
 neighbor portafolio peer-group
 neighbor portafolio remote-as 1
 neighbor portafolio update-source loopbak 0
 
+neighbor 100.100.100.100 peer-group portafolio
 neighbor 11.11.11.11 peer-group portafolio
-neighbor 22.22.22.22 peer-group portafolio
 neighbor 33.33.33.33 peer-group portafolio
 neighbor 44.44.44.44 peer-group portafolio
 neighbor 55.55.55.55 peer-group portafolio
@@ -56,8 +50,8 @@ neighbor 222.222.222.222 peer-group portafolio
 neighbor 223.223.223.223 peer-group portafolio
 
 address-family vpnv4
+neighbor 100.100.100.100 activate
 neighbor 11.11.11.11 activate
-neighbor 22.22.22.22 activate
 neighbor 33.33.33.33 activate
 neighbor 44.44.44.44 activate
 neighbor 55.55.55.55 activate
@@ -70,6 +64,11 @@ exit address-family
 address-family ipv4 vrf portafolio
 redistribute ospf 100
 exit-address-family
+exit
+
+router ospf 100 vrf portafolio
+router-id 172.2.0.2
+redistribute bgp 1 subnets
 
 line con 0
 exec-timeout 35791 0
