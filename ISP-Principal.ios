@@ -42,14 +42,24 @@ mpls ldp autoconfig
 router-id 100.100.100.100
 
 router bgp 1
-bgp log-neighbor-changes
-neighbor 11.11.11.11 remote-as 1
-neighbor 11.11.11.11 update-source Loopback0
+neighbor portafolio peer-group
+neighbor portafolio remote-as 1
+neighbor portafolio update-source loopbak 0
+
+neighbor 11.11.11.11 peer-group portafolio
+neighbor 22.22.22.22 peer-group portafolio
+neighbor 33.33.33.33 peer-group portafolio
+neighbor 44.44.44.44 peer-group portafolio
+neighbor 55.55.55.55 peer-group portafolio
+neighbor 66.66.66.66 peer-group portafolio
+neighbor 111.111.111.111 peer-group portafolio
+neighbor 222.222.222.222 peer-group portafolio
+neighbor 223.223.223.223 peer-group portafolio
 
 address-family vpnv4
-neighbor 11.11.11.11 activate
-neighbor 11.11.11.11 send-community extended
-exit-address-family
+neighbor portafolio activate
+neighbor portafolio send-community extended
+exit address-family
 
 address-family ipv4 vrf portafolio
 redistribute ospf 100
@@ -57,4 +67,3 @@ exit-address-family
 
 line con 0
 exec-timeout 35791 0
-logging synchronous
