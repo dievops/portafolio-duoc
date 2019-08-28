@@ -1,4 +1,4 @@
 # portafolio-duoc
-Configuraciones Routers caso portafolio
+Configuraciones Equipos - caso portafolio
 
 #duocqlo
