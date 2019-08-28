@@ -23,13 +23,17 @@ ip vrf forwarding portafolio
 ip address 172.10.0.2 255.255.255.252
 ip ospf 100 area 0
 
-interface Ethernet0/1
+interface Ethernet1/1
 no shutdown
+ip vrf forwarding portafolio
+ip address 172.100.0.2 255.255.255.252
+ip ospf 100 area 0
+
+interface Ethernet0/1
 no ip address
 shutdown
 
 interface Ethernet0/2
-no shutdown
 no ip address
 shutdown
 
