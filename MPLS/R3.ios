@@ -1,0 +1,64 @@
+enable
+terminal escape-character 3
+configure terminal
+no ip domain-lookup
+
+hostname R3
+
+interface Loopback0
+no shutdown
+ip address 223.223.223.223 255.255.255.255
+ip ospf 1 area 0
+
+interface Ethernet0/0
+no shutdown
+ip address 23.23.23.2 255.255.255.252
+ip ospf 1 area 0
+
+interface Ethernet0/1
+no shutdown
+ip address 200.200.203.2 255.255.255.252
+ip ospf 1 area 0
+
+interface Ethernet0/2
+no shutdown
+ip address 200.200.206.2 255.255.255.252
+ip ospf 1 area 0
+
+interface Ethernet0/3
+no shutdown
+ip address 200.200.210.1 255.255.255.252
+ip ospf 1 area 0
+
+router ospf 1
+mpls ldp autoconfig
+router-id 223.223.223.223
+
+router bgp 1
+neighbor portafolio peer-group
+neighbor portafolio remote-as 1
+neighbor portafolio update-source loopback 0
+
+neighbor 100.100.100.100 peer-group portafolio
+neighbor 11.11.11.11 peer-group portafolio
+neighbor 22.22.22.22 peer-group portafolio
+neighbor 44.44.44.44 peer-group portafolio
+neighbor 55.55.55.55 peer-group portafolio
+neighbor 66.66.66.66 peer-group portafolio
+neighbor 111.111.111.111 peer-group portafolio
+neighbor 222.222.222.222 peer-group portafolio
+neighbor 33.33.33.33 peer-group portafolio
+
+address-family vpnv4
+neighbor 100.100.100.100 activate
+neighbor 11.11.11.11 activate
+neighbor 22.22.22.22 activate
+neighbor 44.44.44.44 activate
+neighbor 55.55.55.55 activate
+neighbor 66.66.66.66 activate
+neighbor 111.111.111.111 activate
+neighbor 222.222.222.222 activate
+neighbor 33.33.33.33 activate
+
+line con 0
+exec-timeout 35791 0
