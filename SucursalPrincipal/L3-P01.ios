@@ -1,0 +1,65 @@
+enable
+terminal escape-character 3
+configure terminal
+no ip domain-lookup
+
+hostname L3-P01
+
+interface Loopback0
+ip address 172.10.10.1 255.255.255.255
+ip ospf 100 area 0
+
+interface Ethernet1/0
+ip address 172.10.0.3 255.255.255.248
+ip ospf 100 area 0
+no shutdown
+
+interface Ethernet0/3
+ip address dhcp
+no sh
+
+interface Ethernet0/1
+ip address 110.110.110.1 255.255.255.252
+ip ospf 100 area 0
+no shutdown
+
+interface Ethernet0/2
+no ip address
+
+interface Ethernet0/2.10
+encapsulation dot1Q 10
+ip address 10.10.10.253 255.255.255.0
+ip ospf 100 area 0
+vrrp 10 ip 10.10.10.1
+vrrp 10 preempt
+vrrp 10 priority 200
+
+interface Ethernet0/2.20
+encapsulation dot1Q 20
+ip address 10.10.20.253 255.255.255.0
+ip ospf 100 area 0
+vrrp 20 ip 10.10.20.1
+vrrp 20 preempt
+vrrp 20 priority 200
+
+interface Ethernet0/2.30
+encapsulation dot1Q 30
+ip address 10.10.30.253 255.255.255.0
+ip ospf 100 area 0
+vrrp 30 ip 10.10.30.1
+vrrp 30 preempt
+vrrp 30 priority 200
+
+interface Ethernet0/2.40
+encapsulation dot1Q 40
+ip address 10.10.40.253 255.255.255.0
+ip ospf 100 area 0
+vrrp 40 ip 10.10.40.1
+vrrp 40 preempt
+vrrp 40 priority 200
+
+router ospf 100
+router-id 172.10.0.2
+
+line con 0
+exec-timeout 35791 0
