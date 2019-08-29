@@ -83,7 +83,7 @@ no ip address
 shutdown
 
 router ospf 100
-router-id 172.10.0.2
+router-id 172.10.0.3
 
 line con 0
 exec-timeout 35791 0

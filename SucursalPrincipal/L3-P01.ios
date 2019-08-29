@@ -10,7 +10,7 @@ ip address 172.10.10.1 255.255.255.255
 ip ospf 100 area 0
 
 interface Ethernet1/0
-ip address 172.10.0.3 255.255.255.248
+ip address 172.10.0.2 255.255.255.248
 ip ospf 100 area 0
 no shutdown
 
@@ -24,6 +24,7 @@ ip ospf 100 area 0
 no shutdown
 
 interface Ethernet0/2
+no shutdown
 no ip address
 
 interface Ethernet0/2.10
@@ -59,7 +60,7 @@ vrrp 40 preempt
 vrrp 40 priority 200
 
 router ospf 100
-router-id 172.10.0.1
+router-id 172.10.0.2
 
 line con 0
 exec-timeout 35791 0

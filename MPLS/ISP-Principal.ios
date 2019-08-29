@@ -38,6 +38,7 @@ ip ospf 1 area 0
 
 router ospf 100 vrf portafolio
 redistribute bgp 1 subnets
+router-id 172.10.0.1
 
 router ospf 1
 mpls ldp autoconfig
