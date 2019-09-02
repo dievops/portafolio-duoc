@@ -1,0 +1,108 @@
+enable
+terminal escape-character 3
+configure terminal
+no ip domain-lookup
+no service config
+
+hostname L3-S05-01
+
+interface Loopback0
+ip address 172.5.5.5 255.255.255.255
+ip ospf 100 area 0
+
+interface Ethernet0/0
+ip address 172.5.0.2 255.255.255.248
+ip ospf 100 area 0
+no shutdown
+
+interface Ethernet0/3
+ip address dhcp
+ip ospf 100 area 0
+ip nat outside
+ip nat enable
+no shutdown
+
+interface Ethernet0/1.10
+encapsulation dot1Q 10
+ip address 10.5.10.253 255.255.255.0
+ip ospf 100 area 0
+vrrp 10 ip 10.5.10.1
+vrrp 10 preempt
+vrrp 10 priority 200
+ip nat inside
+ip nat enable
+
+interface Ethernet0/1.20
+encapsulation dot1Q 20
+ip address 10.5.20.253 255.255.255.0
+ip ospf 100 area 0
+vrrp 20 ip 10.5.20.1
+vrrp 20 preempt
+vrrp 20 priority 200
+ip nat inside
+ip nat enable
+
+interface Ethernet0/1.30
+encapsulation dot1Q 30
+ip address 10.5.30.253 255.255.255.0
+ip ospf 100 area 0
+vrrp 30 ip 10.5.30.1
+vrrp 30 preempt
+vrrp 30 priority 200
+ip nat inside
+ip nat enable
+
+interface Ethernet0/1.40
+encapsulation dot1Q 40
+ip address 10.5.40.253 255.255.255.0
+ip ospf 100 area 0
+vrrp 40 ip 10.5.40.1
+vrrp 40 preempt
+vrrp 40 priority 200
+ip nat inside
+ip nat enable
+
+interface e0/1
+no shutdown
+
+router ospf 100
+router-id 172.5.0.2
+passive-interface ethernet 0/3
+
+line con 0
+exec-timeout 35791 0
+
+ip dhcp pool VLAN10
+default-router 10.5.10.1
+network 10.5.10.0 255.255.255.0
+dns-server 1.1.1.1
+
+ip dhcp pool VLAN20
+default-router 10.5.20.1
+network 10.5.20.0 255.255.255.0
+dns-server 1.1.1.1
+
+ip dhcp pool VLAN30
+default-router 10.5.30.1
+network 10.5.30.0 255.255.255.0
+dns-server 1.1.1.1
+
+ip dhcp pool VLAN40
+default-router 10.5.40.1
+network 10.5.40.0 255.255.255.0
+dns-server 1.1.1.1
+
+ip dhcp excluded-address 10.5.10.1 10.5.10.10
+ip dhcp excluded-address 10.5.20.1 10.5.20.10
+ip dhcp excluded-address 10.5.30.1 10.5.30.10
+ip dhcp excluded-address 10.5.40.1 10.5.40.10
+
+ip route 0.0.0.0 0.0.0.0 192.168.0.1
+
+ip access-list standard INTERNET
+permit 10.5.10.0 0.0.0.255
+permit 10.5.20.0 0.0.0.255
+permit 10.5.30.0 0.0.0.255
+permit 10.5.40.0 0.0.0.255
+exit
+ip nat source list INTERNET interface Ethernet0/3 overload
