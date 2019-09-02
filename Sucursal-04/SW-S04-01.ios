@@ -1,7 +1,7 @@
 enable
 terminal escape-character 3
 configure terminal
-hostname SW-S03-01
+hostname SW-S04-01
 no ip domain-lookup
 no ip igmp snooping
 
