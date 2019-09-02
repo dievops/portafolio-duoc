@@ -2,7 +2,7 @@ enable
 terminal escape-character 3
 configure terminal
 no ip domain-lookup
-
+no service config
 hostname L3-P02
 
 interface Loopback0
