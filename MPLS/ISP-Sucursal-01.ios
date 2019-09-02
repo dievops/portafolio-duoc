@@ -37,7 +37,7 @@ no ip address
 shutdown
 
 router ospf 100 vrf portafolio
-router-id 172.1.0.2
+router-id 172.1.0.1
 redistribute bgp 1 subnets
 
 router ospf 1

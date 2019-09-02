@@ -1,0 +1,83 @@
+enable
+terminal escape-character 3
+configure terminal
+no ip domain-lookup
+no service config
+
+hostname L3-S04-02
+
+interface Loopback0
+ip address 172.4.4.5 255.255.255.255
+ip ospf 100 area 0
+
+interface Ethernet0/0
+ip address 172.4.0.3 255.255.255.248
+ip ospf 100 area 0
+no shutdown
+
+interface Ethernet0/3
+ip address dhcp
+ip ospf 100 area 0
+ip nat outside
+ip nat enable
+no shutdown
+
+interface Ethernet0/2.10
+encapsulation dot1Q 10
+ip address 10.4.10.254 255.255.255.0
+ip ospf 100 area 0
+vrrp 10 ip 10.4.10.1
+vrrp 10 preempt
+vrrp 10 priority 200
+ip nat inside
+ip nat enable
+
+interface Ethernet0/2.20
+encapsulation dot1Q 20
+ip address 10.4.20.254 255.255.255.0
+ip ospf 100 area 0
+vrrp 20 ip 10.4.20.1
+vrrp 20 preempt
+vrrp 20 priority 200
+ip nat inside
+ip nat enable
+
+interface Ethernet0/2.30
+encapsulation dot1Q 30
+ip address 10.4.30.254 255.255.255.0
+ip ospf 100 area 0
+vrrp 30 ip 10.4.30.1
+vrrp 30 preempt
+vrrp 30 priority 200
+ip nat inside
+ip nat enable
+
+interface Ethernet0/2.40
+encapsulation dot1Q 40
+ip address 10.4.40.254 255.255.255.0
+ip ospf 100 area 0
+vrrp 40 ip 10.4.40.1
+vrrp 40 preempt
+vrrp 40 priority 200
+ip nat inside
+ip nat enable
+
+interface Ethernet0/2
+no shutdown
+
+router ospf 100
+router-id 172.4.0.3
+passive-interface ethernet 0/3
+
+line con 0
+exec-timeout 35791 0
+
+ip route 0.0.0.0 0.0.0.0 192.168.0.1
+
+ip access-list standard INTERNET
+permit 10.4.10.0 0.0.0.255
+permit 10.4.20.0 0.0.0.255
+permit 10.4.30.0 0.0.0.255
+permit 10.4.40.0 0.0.0.255
+exit
+ip nat source list INTERNET interface Ethernet0/3 overload
