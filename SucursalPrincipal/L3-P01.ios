@@ -17,6 +17,7 @@ no shutdown
 
 interface Ethernet0/3
 ip address dhcp
+ip ospf 100 area 0
 no shutdown
 
 interface Ethernet0/1.10
@@ -51,8 +52,38 @@ vrrp 40 ip 10.10.40.1
 vrrp 40 preempt
 vrrp 40 priority 200
 
+interface e0/0
+no shutdown
+
 router ospf 100
 router-id 172.10.0.2
 
 line con 0
 exec-timeout 35791 0
+
+ip dhcp pool VLAN10
+default-router 10.10.10.1
+network 10.10.10.0 255.255.255.0
+dns-server 1.1.1.1
+
+ip dhcp pool VLAN20
+default-router 10.10.20.1
+network 10.10.20.0 255.255.255.0
+dns-server 1.1.1.1
+
+ip dhcp pool VLAN30
+default-router 10.10.30.1
+network 10.10.30.0 255.255.255.0
+dns-server 1.1.1.1
+
+ip dhcp pool VLAN40
+default-router 10.10.40.1
+network 10.10.40.0 255.255.255.0
+dns-server 1.1.1.1
+
+ip dhcp excluded-address 10.10.10.1 10.10.10.10
+ip dhcp excluded-address 10.10.20.1 10.10.20.10
+ip dhcp excluded-address 10.10.30.1 10.10.30.10
+ip dhcp excluded-address 10.10.40.1 10.10.40.10
+
+ip route 0.0.0.0 0.0.0.0 192.168.0.1
