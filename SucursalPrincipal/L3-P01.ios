@@ -9,25 +9,16 @@ interface Loopback0
 ip address 172.10.10.1 255.255.255.255
 ip ospf 100 area 0
 
-interface Ethernet1/0
+interface Ethernet0/0
 ip address 172.10.0.2 255.255.255.248
 ip ospf 100 area 0
 no shutdown
 
 interface Ethernet0/3
 ip address dhcp
-no sh
-
-interface Ethernet0/1
-ip address 110.110.110.1 255.255.255.252
-ip ospf 100 area 0
 no shutdown
 
-interface Ethernet0/2
-no shutdown
-no ip address
-
-interface Ethernet0/2.10
+interface Ethernet0/1.10
 encapsulation dot1Q 10
 ip address 10.10.10.253 255.255.255.0
 ip ospf 100 area 0
@@ -35,7 +26,7 @@ vrrp 10 ip 10.10.10.1
 vrrp 10 preempt
 vrrp 10 priority 200
 
-interface Ethernet0/2.20
+interface Ethernet0/1.20
 encapsulation dot1Q 20
 ip address 10.10.20.253 255.255.255.0
 ip ospf 100 area 0
@@ -43,7 +34,7 @@ vrrp 20 ip 10.10.20.1
 vrrp 20 preempt
 vrrp 20 priority 200
 
-interface Ethernet0/2.30
+interface Ethernet0/1.30
 encapsulation dot1Q 30
 ip address 10.10.30.253 255.255.255.0
 ip ospf 100 area 0
@@ -51,7 +42,7 @@ vrrp 30 ip 10.10.30.1
 vrrp 30 preempt
 vrrp 30 priority 200
 
-interface Ethernet0/2.40
+interface Ethernet0/1.40
 encapsulation dot1Q 40
 ip address 10.10.40.253 255.255.255.0
 ip ospf 100 area 0

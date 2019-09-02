@@ -4,83 +4,47 @@ configure terminal
 no ip domain-lookup
 
 hostname L3-P02
-ip dhcp excluded-address 10.10.10.1 10.10.10.10
-ip dhcp excluded-address 10.10.20.1 10.10.20.10
-ip dhcp excluded-address 10.10.30.1 10.10.30.10
-ip dhcp excluded-address 10.10.40.1 10.10.40.10
-
-
-ip dhcp pool VLAN10
-network 10.10.10.0 255.255.255.0
-dns-server 1.1.1.1 
-default-router 10.10.10.1
-
-ip dhcp pool VLAN20
-network 10.10.20.0 255.255.255.0
-dns-server 1.1.1.1 
-default-router 10.10.20.1
-
-ip dhcp pool VLAN30
-network 10.10.30.0 255.255.255.0
-dns-server 1.1.1.1 
-default-router 10.10.30.1
-
-ip dhcp pool VLAN40
-network 10.10.40.0 255.255.255.0
-dns-server 1.1.1.1 
-default-router 10.10.40.1
 
 interface Loopback0
-ip address 172.10.10.2 255.255.255.255
+ip address 172.10.10.1 255.255.255.255
 ip ospf 100 area 0
 
 interface Ethernet0/0
 ip address 172.10.0.3 255.255.255.248
 ip ospf 100 area 0
-
-interface Ethernet0/1
-ip address 110.110.110.2 255.255.255.252
-ip ospf 100 area 0
 no shutdown
 
-interface Ethernet0/2
-no ip address
-
-interface Ethernet0/2.10
+interface Ethernet0/1.10
 encapsulation dot1Q 10
 ip address 10.10.10.254 255.255.255.0
 ip ospf 100 area 0
 vrrp 10 ip 10.10.10.1
 vrrp 10 preempt
-vrrp 10 priority 100
+vrrp 10 priority 200
 
-interface Ethernet0/2.20
+interface Ethernet0/1.20
 encapsulation dot1Q 20
 ip address 10.10.20.254 255.255.255.0
 ip ospf 100 area 0
 vrrp 20 ip 10.10.20.1
 vrrp 20 preempt
-vrrp 20 priority 100
+vrrp 20 priority 200
 
-interface Ethernet0/2.30
+interface Ethernet0/1.30
 encapsulation dot1Q 30
 ip address 10.10.30.254 255.255.255.0
 ip ospf 100 area 0
 vrrp 30 ip 10.10.30.1
 vrrp 30 preempt
-vrrp 30 priority 100
+vrrp 30 priority 200
 
-interface Ethernet0/2.40
+interface Ethernet0/1.40
 encapsulation dot1Q 40
 ip address 10.10.40.254 255.255.255.0
 ip ospf 100 area 0
 vrrp 40 ip 10.10.40.1
 vrrp 40 preempt
-vrrp 40 priority 100
-
-interface Ethernet0/3
-no ip address
-shutdown
+vrrp 40 priority 200
 
 router ospf 100
 router-id 172.10.0.3
