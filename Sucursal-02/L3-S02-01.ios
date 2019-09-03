@@ -62,7 +62,7 @@ vrrp 40 priority 200
 ip nat inside
 ip nat enable
 
-interface e0/1
+interface f0/1
 no shutdown
 
 router ospf 100
