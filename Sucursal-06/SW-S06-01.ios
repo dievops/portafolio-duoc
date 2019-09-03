@@ -19,3 +19,6 @@ interface e0/0
 switchport mode access
 switchport access vlan 10
 no shutdown
+
+no cdp log mismatch duplex
+do wr
