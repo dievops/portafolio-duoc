@@ -62,6 +62,7 @@ ip nat inside
 ip nat enable
 
 interface Ethernet0/2
+no cdp enable
 no shutdown
 
 router ospf 100
