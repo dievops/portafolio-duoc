@@ -19,3 +19,13 @@ interface e0/0
 switchport mode access
 switchport access vlan 10
 no shutdown
+
+interface e1/2
+switchport mode access
+switchport access vlan 10
+no shutdown
+
+interface e1/1
+switchport mode access
+switchport access vlan 40
+no shutdown
