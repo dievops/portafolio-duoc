@@ -75,10 +75,6 @@ exec-timeout 35791 0
 
 ip route 0.0.0.0 0.0.0.0 192.168.0.1
 
-ip access-list standard INTERNET
-permit 10.4.10.0 0.0.0.255
-permit 10.4.20.0 0.0.0.255
-permit 10.4.30.0 0.0.0.255
-permit 10.4.40.0 0.0.0.255
-exit
-ip nat source list INTERNET interface f1/0 overload
+access-list 1 permit 10.0.0.0 0.255.255.255
+
+ip nat inside source list 1 interface fastEthernet 1/0
