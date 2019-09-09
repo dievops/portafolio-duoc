@@ -1,4 +1,4 @@
 # portafolio-duoc
 Configuraciones Equipos - caso portafolio
 
-#duocqlo
+Diego Muñoz
